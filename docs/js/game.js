@@ -206,9 +206,9 @@ function respawnSnowflake(snowflakeElement) {
 function calculateSpeedMultiplier() {
     // Progressive speed increase: faster as you catch more
     // At 0 catches: 1.0x (normal speed)
-    // At 5 catches: 0.8x (25% faster)
-    // At 10 catches: 0.6x (66% faster)
-    const multiplier = Math.max(0.5, 1 - (gameState.caughtCount * 0.04));
+    // At 5 catches: 0.7x (43% faster)
+    // At 8 catches: 0.5x (100% faster - MAX)
+    const multiplier = Math.max(0.5, 1 - (gameState.caughtCount * 0.06));
     return multiplier;
 }
 
