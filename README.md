@@ -13,7 +13,7 @@ Eine festliche, mobile-optimierte Statistik-Website für den TSV Marquartstein F
 
 ## Live Demo
 
-Die Website ist erreichbar über GitHub Pages: [URL wird nach Deployment eingefügt]
+Die Website ist live unter: **https://basthel.github.io/tsv-christmas-2025/**
 
 ## QR-Code
 
@@ -62,7 +62,7 @@ python utils/generate_qr.py "https://your-url.com"
 ### Lokaler Test
 
 ```bash
-cd website
+cd docs
 python -m http.server 8000
 # Öffne http://localhost:8000
 ```
@@ -72,8 +72,8 @@ python -m http.server 8000
 Die Website wird automatisch über GitHub Pages bereitgestellt.
 
 1. Repository auf GitHub pushen
-2. In Repository-Settings → Pages → Source: Branch `main`, Folder `/website`
-3. Website wird unter `https://[username].github.io/[repo-name]` verfügbar
+2. In Repository-Settings → Pages → Source: Branch `main`, Folder `/docs`
+3. Website ist live unter: https://basthel.github.io/tsv-christmas-2025/
 
 ## Lizenz
 
