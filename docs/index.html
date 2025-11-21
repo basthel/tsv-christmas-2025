@@ -22,6 +22,36 @@
         <div class="snowflake">❆</div>
     </div>
 
+    <!-- Game Progress Bar -->
+    <div id="gameProgressBar" class="progress-bar-container">
+        <div class="progress-bar-content">
+            <span class="progress-text">🎯 <span id="caughtCount">0</span> / <span id="goalCount">10</span> Schneeflocken gefangen</span>
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Celebration Modal -->
+    <div id="celebrationModal" class="modal">
+        <div class="modal-content">
+            <div class="prize-emoji" id="prizeEmoji">🎁</div>
+            <h2 id="prizeTitle">Glückwunsch!</h2>
+            <p id="prizeMessage">Du hast gewonnen!</p>
+            <button id="playAgainBtn" class="play-again-btn">🎄 Nochmal spielen</button>
+        </div>
+    </div>
+
+    <!-- Rotation Prompt Overlay -->
+    <div id="rotationPrompt" class="rotation-overlay">
+        <div class="rotation-content">
+            <div class="rotation-icon">📱</div>
+            <h2 class="rotation-title">Für die beste Ansicht</h2>
+            <p class="rotation-message">Bitte Handy drehen</p>
+            <div class="rotation-arrow">🔄</div>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="header">
         <div class="container">
@@ -170,5 +200,7 @@
     <script src="js/data-loader.js"></script>
     <script src="js/charts.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/rotation-prompt.js"></script>
 </body>
 </html>

@@ -117,34 +117,9 @@ const ChartCreator = {
         const recentForTrend = recentFor - firstHalfFor;
         const recentAgainstTrend = firstHalfAgainst - recentAgainst;
 
-        let offensiveText = '';
-        let defensiveText = '';
-
-        // Analyze offensive trend
-        if (forImprovement > 0.5) {
-            offensiveText = 'Offensive deutlich verbessert';
-        } else if (forImprovement > 0.2) {
-            offensiveText = 'Offensive leicht gesteigert';
-        } else if (forImprovement < -0.5) {
-            offensiveText = 'Offensive geschwächt';
-        } else if (recentForTrend > 0.3) {
-            offensiveText = 'Offensive zuletzt stabilisiert';
-        } else {
-            offensiveText = 'Offensive konstant';
-        }
-
-        // Analyze defensive trend
-        if (againstImprovement > 0.5) {
-            defensiveText = 'Defensive deutlich stabiler';
-        } else if (againstImprovement > 0.2) {
-            defensiveText = 'Defensive verbessert';
-        } else if (againstImprovement < -0.5) {
-            defensiveText = 'Defensive anfälliger geworden';
-        } else if (recentAgainstTrend > 0.3) {
-            defensiveText = 'Defensive zuletzt wieder stabilisiert';
-        } else {
-            defensiveText = 'Defensive stabilisiert';
-        }
+        // Fixed trend text as requested
+        let offensiveText = 'Offensive konstant';
+        let defensiveText = 'Defensive stabilisiert';
 
         let insight = `📊 Trend-Analyse: ${offensiveText}, ${defensiveText}`;
 
