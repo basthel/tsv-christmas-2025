@@ -5,7 +5,7 @@
 
 // Game configuration
 const GAME_CONFIG = {
-    goal: 10,  // Number of snowflakes to catch (easily adjustable)
+    goal: 15,  // Number of snowflakes to catch (easily adjustable)
     respawnDelay: 1000,  // Delay before respawning snowflake (ms)
     progressBarDisplayTime: 3000,  // How long to show progress bar (ms)
 };
@@ -67,7 +67,8 @@ const PRIZES = [
 let gameState = {
     caughtCount: 0,
     isGameOver: false,
-    progressBarHideTimer: null
+    progressBarHideTimer: null,
+    snowflakeOriginalDurations: new Map() // Store original animation durations
 };
 
 /**
@@ -95,6 +96,11 @@ function initializeSnowflakes() {
     const snowflakes = document.querySelectorAll('.snowflake');
 
     snowflakes.forEach((snowflake, index) => {
+        // Store original animation duration
+        const computedStyle = window.getComputedStyle(snowflake);
+        const duration = parseFloat(computedStyle.animationDuration) || 10;
+        gameState.snowflakeOriginalDurations.set(snowflake, duration);
+
         // Add click event for desktop
         snowflake.addEventListener('click', function(e) {
             if (!gameState.isGameOver) {
@@ -109,6 +115,13 @@ function initializeSnowflakes() {
                 catchSnowflake(snowflake);
             }
         }, { passive: false });
+
+        // Add animation iteration listener to detect missed snowflakes
+        snowflake.addEventListener('animationiteration', function(e) {
+            if (!gameState.isGameOver && !snowflake.classList.contains('caught')) {
+                handleMissedSnowflake(snowflake);
+            }
+        });
     });
 }
 
@@ -130,6 +143,8 @@ function catchSnowflake(snowflakeElement) {
     // Update UI
     updateProgressBar();
 
+    // Speed will update when snowflakes respawn (no mid-animation jumps)
+
     // Play sound effect (optional - could add later)
     // playSound('pop');
 
@@ -141,6 +156,28 @@ function catchSnowflake(snowflakeElement) {
     // Check if game is won
     if (gameState.caughtCount >= GAME_CONFIG.goal) {
         winGame();
+    }
+}
+
+/**
+ * Handle missing a snowflake (reached bottom)
+ */
+function handleMissedSnowflake(snowflakeElement) {
+    // Don't penalize if already caught
+    if (snowflakeElement.classList.contains('caught')) {
+        return;
+    }
+
+    // Reduce counter (but not below 0)
+    if (gameState.caughtCount > 0) {
+        gameState.caughtCount--;
+
+        // Update UI with penalty indication
+        updateProgressBar(true); // true = penalty mode
+
+        // Speed will update when snowflakes respawn (no mid-animation jumps)
+
+        console.log('❌ Missed snowflake! Score reduced to:', gameState.caughtCount);
     }
 }
 
@@ -158,8 +195,45 @@ function respawnSnowflake(snowflakeElement) {
     // Force reflow
     snowflakeElement.offsetHeight;
 
-    // Re-enable animation
+    // Re-enable animation with updated speed
     snowflakeElement.style.animation = animation || '';
+    updateSnowflakeSpeed(snowflakeElement);
+}
+
+/**
+ * Calculate speed multiplier based on progress
+ */
+function calculateSpeedMultiplier() {
+    // Progressive speed increase: faster as you catch more
+    // At 0 catches: 1.0x (normal speed)
+    // At 5 catches: 0.8x (25% faster)
+    // At 10 catches: 0.6x (66% faster)
+    const multiplier = Math.max(0.5, 1 - (gameState.caughtCount * 0.04));
+    return multiplier;
+}
+
+/**
+ * Update animation speed for a single snowflake
+ */
+function updateSnowflakeSpeed(snowflakeElement) {
+    const originalDuration = gameState.snowflakeOriginalDurations.get(snowflakeElement);
+    if (!originalDuration) return;
+
+    const speedMultiplier = calculateSpeedMultiplier();
+    const newDuration = originalDuration * speedMultiplier;
+
+    // Update animation duration
+    snowflakeElement.style.animationDuration = `${newDuration}s`;
+}
+
+/**
+ * Update speeds for all snowflakes
+ */
+function updateAllSnowflakeSpeeds() {
+    const snowflakes = document.querySelectorAll('.snowflake');
+    snowflakes.forEach(snowflake => {
+        updateSnowflakeSpeed(snowflake);
+    });
 }
 
 /**
@@ -191,14 +265,26 @@ function hideProgressBar() {
 
 /**
  * Update progress bar UI
+ * @param {boolean} isPenalty - If true, shows red flash for penalty
  */
-function updateProgressBar() {
+function updateProgressBar(isPenalty = false) {
+    const progressBar = document.getElementById('gameProgressBar');
+    const progressFill = document.getElementById('progressFill');
+
     // Update count text
     document.getElementById('caughtCount').textContent = gameState.caughtCount;
 
     // Update progress bar fill
     const percentage = (gameState.caughtCount / GAME_CONFIG.goal) * 100;
-    document.getElementById('progressFill').style.width = percentage + '%';
+    progressFill.style.width = percentage + '%';
+
+    // Show red flash if penalty
+    if (isPenalty) {
+        progressBar.classList.add('penalty');
+        setTimeout(() => {
+            progressBar.classList.remove('penalty');
+        }, 500);
+    }
 
     // Show progress bar (will auto-hide after delay)
     showProgressBar();
@@ -291,6 +377,9 @@ function resetGame() {
     snowflakes.forEach(snowflake => {
         snowflake.classList.remove('caught');
     });
+
+    // Reset snowflake speeds to original
+    updateAllSnowflakeSpeeds();
 
     console.log('✅ Game reset!');
 }

@@ -363,6 +363,17 @@ body {
     opacity: 1;
 }
 
+.progress-bar-container.penalty {
+    background: linear-gradient(135deg, var(--christmas-red) 0%, #8b0000 100%);
+    animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    25% { transform: translateY(0) translateX(-5px); }
+    75% { transform: translateY(0) translateX(5px); }
+}
+
 @keyframes slideDown {
     from {
         transform: translateY(-100%);
