@@ -107,21 +107,56 @@ const ChartCreator = {
         const firstHalfAgainst = goalsAgainst.slice(0, midPoint).reduce((a, b) => a + b, 0) / midPoint;
         const secondHalfAgainst = goalsAgainst.slice(midPoint).reduce((a, b) => a + b, 0) / (goalsAgainst.length - midPoint);
 
+        // Also check recent trend (last quarter)
+        const lastQuarter = Math.floor(goalsFor.length * 0.75);
+        const recentFor = goalsFor.slice(lastQuarter).reduce((a, b) => a + b, 0) / (goalsFor.length - lastQuarter);
+        const recentAgainst = goalsAgainst.slice(lastQuarter).reduce((a, b) => a + b, 0) / (goalsAgainst.length - lastQuarter);
+
         const forImprovement = secondHalfFor - firstHalfFor;
         const againstImprovement = firstHalfAgainst - secondHalfAgainst;
+        const recentForTrend = recentFor - firstHalfFor;
+        const recentAgainstTrend = firstHalfAgainst - recentAgainst;
 
-        let insight = '📊 Trend-Analyse: ';
+        let offensiveText = '';
+        let defensiveText = '';
 
-        if (forImprovement > 0.3 && againstImprovement > 0.3) {
-            insight += 'Großartige Entwicklung! Die Mannschaft erzielt mehr Tore und kassiert weniger. 🚀';
-        } else if (forImprovement > 0.3) {
-            insight += 'Offensive stark verbessert! Die Mannschaft erzielt deutlich mehr Tore. ⚽';
-        } else if (againstImprovement > 0.3) {
-            insight += 'Defensive stabilisiert! Die Mannschaft kassiert weniger Gegentore. 🛡️';
-        } else if (forImprovement < -0.3 && againstImprovement < -0.3) {
-            insight += 'Herausfordernde Phase. Fokus auf Training und Teamgeist! 💪';
+        // Analyze offensive trend
+        if (forImprovement > 0.5) {
+            offensiveText = 'Offensive deutlich verbessert';
+        } else if (forImprovement > 0.2) {
+            offensiveText = 'Offensive leicht gesteigert';
+        } else if (forImprovement < -0.5) {
+            offensiveText = 'Offensive geschwächt';
+        } else if (recentForTrend > 0.3) {
+            offensiveText = 'Offensive zuletzt stabilisiert';
         } else {
-            insight += 'Konstante Leistung über die Saison. Weiter so! 👍';
+            offensiveText = 'Offensive konstant';
+        }
+
+        // Analyze defensive trend
+        if (againstImprovement > 0.5) {
+            defensiveText = 'Defensive deutlich stabiler';
+        } else if (againstImprovement > 0.2) {
+            defensiveText = 'Defensive verbessert';
+        } else if (againstImprovement < -0.5) {
+            defensiveText = 'Defensive anfälliger geworden';
+        } else if (recentAgainstTrend > 0.3) {
+            defensiveText = 'Defensive zuletzt wieder stabilisiert';
+        } else {
+            defensiveText = 'Defensive stabilisiert';
+        }
+
+        let insight = `📊 Trend-Analyse: ${offensiveText}, ${defensiveText}`;
+
+        // Add overall assessment
+        if (forImprovement > 0.3 && againstImprovement > 0.3) {
+            insight += ' - Großartige Gesamtentwicklung! 🚀';
+        } else if (forImprovement < -0.3 && againstImprovement < -0.3) {
+            insight += ' - Fokus auf Training nötig 💪';
+        } else if (forImprovement > 0.5 || againstImprovement > 0.5) {
+            insight += ' - Positive Entwicklung! ⚽';
+        } else {
+            insight += ' 👍';
         }
 
         document.getElementById('trendInsight').textContent = insight;
@@ -135,7 +170,11 @@ const ChartCreator = {
         if (!ctx) return;
 
         // Extract data
-        const seasons = data.data.map(row => row['Saison']);
+        const seasons = data.data.map(row => {
+            const saison = row['Saison'];
+            const klasse = row['Klasse'] || '';
+            return klasse ? `${saison} (${klasse})` : saison;
+        });
         const firstTeam = data.data.map(row => row['1.Mannschaft'] || 0);
         const secondTeam = data.data.map(row => row['2.Mannschaft'] || 0);
         const youth = data.data.map(row => row['A-Jugend'] || 0);
@@ -146,6 +185,19 @@ const ChartCreator = {
             data: {
                 labels: seasons,
                 datasets: [
+                    {
+                        label: 'Gesamt Spieler',
+                        data: totalPlayers,
+                        backgroundColor: colors.highlight + 'CC',
+                        borderColor: colors.highlight,
+                        borderWidth: 2,
+                        type: 'line',
+                        tension: 0.3,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        fill: false,
+                        yAxisID: 'y1'
+                    },
                     {
                         label: '1. Mannschaft',
                         data: firstTeam,
@@ -191,16 +243,28 @@ const ChartCreator = {
                     y: {
                         beginAtZero: true,
                         stacked: false,
+                        position: 'left',
                         title: {
                             display: true,
-                            text: 'Anzahl Spieler'
+                            text: 'Anzahl Spieler (Team)'
+                        }
+                    },
+                    y1: {
+                        beginAtZero: true,
+                        position: 'right',
+                        title: {
+                            display: true,
+                            text: 'Gesamt Spieler'
+                        },
+                        grid: {
+                            drawOnChartArea: false
                         }
                     },
                     x: {
                         stacked: false,
                         title: {
                             display: true,
-                            text: 'Saison'
+                            text: 'Saison (Klasse)'
                         }
                     }
                 }
@@ -221,17 +285,31 @@ const ChartCreator = {
             type: 'line',
             data: {
                 labels: attendanceData.dates,
-                datasets: [{
-                    label: 'Teilnehmer pro Training',
-                    data: attendanceData.attendees,
-                    borderColor: colors.accent,
-                    backgroundColor: colors.accent + '30',
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.3,
-                    pointRadius: 3,
-                    pointHoverRadius: 5
-                }]
+                datasets: [
+                    {
+                        label: 'Teilnehmer pro Training',
+                        data: attendanceData.attendees,
+                        borderColor: colors.accent,
+                        backgroundColor: colors.accent + '30',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.3,
+                        pointRadius: 3,
+                        pointHoverRadius: 5
+                    },
+                    {
+                        label: 'Rollierender Durchschnitt (6 Trainings)',
+                        data: attendanceData.rolling_avg,
+                        borderColor: colors.highlight,
+                        backgroundColor: 'transparent',
+                        borderWidth: 3,
+                        fill: false,
+                        tension: 0.4,
+                        pointRadius: 0,
+                        pointHoverRadius: 5,
+                        borderDash: []
+                    }
+                ]
             },
             options: {
                 responsive: true,

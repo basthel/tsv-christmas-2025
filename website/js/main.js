@@ -62,6 +62,8 @@ function populateTrainingStats(data) {
     document.getElementById('avgAttendeesPerTraining').textContent = stats.avg_attendees_per_training;
     document.getElementById('overallAttendance').textContent = stats.overall_attendance_rate;
     document.getElementById('totalConfirmed').textContent = stats.total_confirmed;
+    document.getElementById('responseRate').textContent = stats.response_rate;
+    document.getElementById('totalNoResponse').textContent = stats.total_no_response;
 }
 
 /**

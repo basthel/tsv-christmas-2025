@@ -83,17 +83,6 @@
                 </div>
             </section>
 
-            <!-- Section: Historical Player Count -->
-            <section class="stats-section">
-                <h2 class="section-title">📊 10-Jahres-Entwicklung</h2>
-                <p class="section-description">
-                    Spieleranzahl über die letzten Spielzeiten
-                </p>
-                <div class="chart-container">
-                    <canvas id="historicalChart"></canvas>
-                </div>
-            </section>
-
             <!-- Section: Training & Participation Stats -->
             <section class="stats-section">
                 <h2 class="section-title">📊 Training & Teilnahme</h2>
@@ -120,7 +109,15 @@
                     </div>
                     <div class="stat-card">
                         <div class="stat-value" id="totalConfirmed">0</div>
-                        <div class="stat-label">Bestätigte Teilnahmen</div>
+                        <div class="stat-label">Zugesagt</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value"><span id="responseRate">0</span>%</div>
+                        <div class="stat-label">Rückmeldequote</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalNoResponse">0</div>
+                        <div class="stat-label">Keine Rückmeldung</div>
                     </div>
                 </div>
             </section>
@@ -144,6 +141,17 @@
                 </p>
                 <div class="chart-container">
                     <canvas id="monthlyTrainingChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Section: Historical Player Count -->
+            <section class="stats-section">
+                <h2 class="section-title">📊 10-Jahres-Entwicklung</h2>
+                <p class="section-description">
+                    Spieleranzahl über die letzten Spielzeiten
+                </p>
+                <div class="chart-container">
+                    <canvas id="historicalChart"></canvas>
                 </div>
             </section>
 

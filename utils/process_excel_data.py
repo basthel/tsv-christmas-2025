@@ -15,6 +15,9 @@ def process_excel_to_json(excel_path, output_path):
     print(df.head())
     print(f"\nTotal rows: {len(df)}")
 
+    # Replace NaN values with None for valid JSON
+    df = df.fillna(0)
+
     # Convert to dictionary format suitable for web charts
     data = {
         'columns': df.columns.tolist(),
@@ -25,9 +28,9 @@ def process_excel_to_json(excel_path, output_path):
         }
     }
 
-    # Save to JSON
+    # Save to JSON (replace NaN with null)
     with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
+        json.dump(data, f, indent=2, ensure_ascii=False, allow_nan=False, default=str)
 
     print(f"\nData saved to {output_path}")
     return data
