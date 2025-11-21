@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TSV Marquartstein - Saison 2025 Statistiken</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <!-- Snowflakes animation container -->
+    <div class="snowflakes" aria-hidden="true">
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo-container">
+                <img src="assets/images/logo.png" alt="TSV Marquartstein Logo" class="logo">
+            </div>
+            <h1 class="title">TSV Marquartstein</h1>
+            <h2 class="subtitle">Saison 2025 Statistiken</h2>
+            <p class="season-greeting">Frohe Weihnachten 🎄</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+
+            <!-- Section: Performance Trend (Rolling Average) -->
+            <section class="stats-section featured">
+                <h2 class="section-title">📈 Saison-Entwicklung</h2>
+                <p class="section-description">
+                    Rollierender Durchschnitt der Tore (5-Spiele-Fenster)
+                </p>
+                <div class="chart-container">
+                    <canvas id="rollingAverageChart"></canvas>
+                </div>
+                <div class="insight-box">
+                    <p id="trendInsight">Lade Trend-Analyse...</p>
+                </div>
+            </section>
+
+            <!-- Section: Season Overview -->
+            <section class="stats-section">
+                <h2 class="section-title">⚽ Saison-Übersicht</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalGames">0</div>
+                        <div class="stat-label">Spiele</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalWins">0</div>
+                        <div class="stat-label">Siege</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalDraws">0</div>
+                        <div class="stat-label">Unentschieden</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalLosses">0</div>
+                        <div class="stat-label">Niederlagen</div>
+                    </div>
+                    <div class="stat-card highlight">
+                        <div class="stat-value" id="goalsFor">0</div>
+                        <div class="stat-label">Tore erzielt</div>
+                    </div>
+                    <div class="stat-card highlight">
+                        <div class="stat-value" id="goalsAgainst">0</div>
+                        <div class="stat-label">Tore kassiert</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Historical Player Count -->
+            <section class="stats-section">
+                <h2 class="section-title">📊 10-Jahres-Entwicklung</h2>
+                <p class="section-description">
+                    Spieleranzahl über die letzten Spielzeiten
+                </p>
+                <div class="chart-container">
+                    <canvas id="historicalChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Section: Training & Participation Stats -->
+            <section class="stats-section">
+                <h2 class="section-title">📊 Training & Teilnahme</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalTrainingSessions">0</div>
+                        <div class="stat-label">Trainingseinheiten</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalGameSessions">0</div>
+                        <div class="stat-label">Spiele</div>
+                    </div>
+                    <div class="stat-card highlight">
+                        <div class="stat-value" id="uniquePlayers">0</div>
+                        <div class="stat-label">Aktive Spieler</div>
+                    </div>
+                    <div class="stat-card highlight">
+                        <div class="stat-value" id="avgAttendeesPerTraining">0</div>
+                        <div class="stat-label">Ø Teilnehmer/Training</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value"><span id="overallAttendance">0</span>%</div>
+                        <div class="stat-label">Anwesenheitsquote</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalConfirmed">0</div>
+                        <div class="stat-label">Bestätigte Teilnahmen</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Training Attendance Over Year -->
+            <section class="stats-section">
+                <h2 class="section-title">📈 Trainingsteilnahme im Jahresverlauf</h2>
+                <p class="section-description">
+                    Entwicklung der Teilnehmerzahlen bei Trainings
+                </p>
+                <div class="chart-container">
+                    <canvas id="trainingAttendanceChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Section: Monthly Training Stats -->
+            <section class="stats-section">
+                <h2 class="section-title">📅 Monatliche Trainingsübersicht</h2>
+                <p class="section-description">
+                    Anzahl Trainings und durchschnittliche Teilnahme pro Monat
+                </p>
+                <div class="chart-container">
+                    <canvas id="monthlyTrainingChart"></canvas>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>TSV Marquartstein | Saison 2025</p>
+            <p class="footer-greeting">🎅 Frohe Weihnachten und ein erfolgreiches neues Jahr! 🎄</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/data-loader.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

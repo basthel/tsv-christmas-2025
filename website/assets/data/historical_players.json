@@ -1,0 +1,142 @@
+{
+  "columns": [
+    "Saison",
+    "1.Mannschaft",
+    "2.Mannschaft",
+    "A-Jugend",
+    "Spieler",
+    "Klasse",
+    "Unnamed: 6"
+  ],
+  "data": [
+    {
+      "Saison": "25/26",
+      "1.Mannschaft": 29,
+      "2.Mannschaft": 40,
+      "A-Jugend": 10,
+      "Spieler": 53,
+      "Klasse": "B",
+      "Unnamed: 6": NaN
+    },
+    {
+      "Saison": "24/25",
+      "1.Mannschaft": 33,
+      "2.Mannschaft": 0,
+      "A-Jugend": 7,
+      "Spieler": 35,
+      "Klasse": "B",
+      "Unnamed: 6": NaN
+    },
+    {
+      "Saison": "23/24",
+      "1.Mannschaft": 27,
+      "2.Mannschaft": 0,
+      "A-Jugend": 1,
+      "Spieler": 27,
+      "Klasse": "C",
+      "Unnamed: 6": "timo"
+    },
+    {
+      "Saison": "22/23",
+      "1.Mannschaft": 30,
+      "2.Mannschaft": 0,
+      "A-Jugend": 0,
+      "Spieler": 30,
+      "Klasse": "B",
+      "Unnamed: 6": NaN
+    },
+    {
+      "Saison": "21/22",
+      "1.Mannschaft": 31,
+      "2.Mannschaft": 43,
+      "A-Jugend": 0,
+      "Spieler": 45,
+      "Klasse": "B",
+      "Unnamed: 6": NaN
+    },
+    {
+      "Saison": "19/20",
+      "1.Mannschaft": 25,
+      "2.Mannschaft": 40,
+      "A-Jugend": 1,
+      "Spieler": 48,
+      "Klasse": "B",
+      "Unnamed: 6": "notter"
+    },
+    {
+      "Saison": "18/19",
+      "1.Mannschaft": 35,
+      "2.Mannschaft": 0,
+      "A-Jugend": 2,
+      "Spieler": 35,
+      "Klasse": "C",
+      "Unnamed: 6": "just schritteik"
+    },
+    {
+      "Saison": "17/18",
+      "1.Mannschaft": 26,
+      "2.Mannschaft": 0,
+      "A-Jugend": 1,
+      "Spieler": 26,
+      "Klasse": "B",
+      "Unnamed: 6": "vent"
+    },
+    {
+      "Saison": "16/17",
+      "1.Mannschaft": 26,
+      "2.Mannschaft": 33,
+      "A-Jugend": 4,
+      "Spieler": 45,
+      "Klasse": "B",
+      "Unnamed: 6": "frey weiß"
+    },
+    {
+      "Saison": "15/16",
+      "1.Mannschaft": 29,
+      "2.Mannschaft": 0,
+      "A-Jugend": 4,
+      "Spieler": 31,
+      "Klasse": "B",
+      "Unnamed: 6": NaN
+    },
+    {
+      "Saison": "14/15",
+      "1.Mannschaft": 28,
+      "2.Mannschaft": 40,
+      "A-Jugend": 3,
+      "Spieler": 48,
+      "Klasse": "A",
+      "Unnamed: 6": NaN
+    },
+    {
+      "Saison": "13/14",
+      "1.Mannschaft": 25,
+      "2.Mannschaft": 55,
+      "A-Jugend": 6,
+      "Spieler": 60,
+      "Klasse": "B",
+      "Unnamed: 6": "5er Wolfi"
+    },
+    {
+      "Saison": "12/13",
+      "1.Mannschaft": 19,
+      "2.Mannschaft": 34,
+      "A-Jugend": 1,
+      "Spieler": 39,
+      "Klasse": "B",
+      "Unnamed: 6": "5er,Fertsch,Hell,Poferl,Rudi,SchützingerF, Schützinger S, Ullrich M., "
+    }
+  ],
+  "summary": {
+    "total_rows": 13,
+    "years": [
+      "Saison",
+      "1.Mannschaft",
+      "2.Mannschaft",
+      "A-Jugend",
+      "Spieler",
+      "Klasse",
+      "Unnamed: 6"
+    ]
+  }
+}
