@@ -33,20 +33,28 @@ def generate_qr_code(url, output_path, logo_path=None):
             qr_width, qr_height = qr_img.size
             logo_size = qr_width // 5
 
-            # Resize logo
-            logo = logo.resize((logo_size, logo_size), Image.Resampling.LANCZOS)
+            # Resize logo maintaining aspect ratio
+            logo.thumbnail((logo_size, logo_size), Image.Resampling.LANCZOS)
 
-            # Calculate position for logo (center)
-            logo_pos = ((qr_width - logo_size) // 2, (qr_height - logo_size) // 2)
+            # Get actual logo dimensions after thumbnail
+            logo_w, logo_h = logo.size
 
-            # Create a white background for logo
-            logo_bg = Image.new('RGB', (logo_size + 20, logo_size + 20), 'white')
-            logo_bg.paste(logo, (10, 10))
+            # Create a white square background
+            logo_bg_size = logo_size + 20
+            logo_bg = Image.new('RGB', (logo_bg_size, logo_bg_size), 'white')
 
-            # Paste logo onto QR code
-            qr_img.paste(logo_bg, (logo_pos[0] - 10, logo_pos[1] - 10))
+            # Center the logo on the white background
+            logo_x = (logo_bg_size - logo_w) // 2
+            logo_y = (logo_bg_size - logo_h) // 2
+            logo_bg.paste(logo, (logo_x, logo_y), logo if logo.mode == 'RGBA' else None)
 
-            print(f"✓ Logo added to QR code")
+            # Calculate position for logo background (center of QR code)
+            bg_pos = ((qr_width - logo_bg_size) // 2, (qr_height - logo_bg_size) // 2)
+
+            # Paste logo background onto QR code
+            qr_img.paste(logo_bg, bg_pos)
+
+            print(f"✓ Logo added to QR code (aspect ratio preserved)")
         except Exception as e:
             print(f"⚠ Could not add logo: {e}")
 
