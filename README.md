@@ -17,9 +17,9 @@ Die Website ist live unter: **https://basthel.github.io/tsv-christmas-2025/**
 
 ## QR-Code
 
-Scanne den QR-Code mit deinem Smartphone für direkten Zugriff:
+Scanne den QR-Code mit deinem Smartphone für direkten Zugriff zur Website:
 
-![QR Code](docs/qr_code_printable.png)
+![QR Code](https://basthel.github.io/tsv-christmas-2025/qr_code_printable.png)
 
 ## Technologie
 
