@@ -152,8 +152,8 @@ if __name__ == '__main__':
     url = sys.argv[1] if len(sys.argv) > 1 else 'https://YOUR-USERNAME.github.io/tsv-marquartstein-stats'
 
     logo_path = '/home/shell/test_fb/data/logo.png'
-    output_basic = '/home/shell/test_fb/website/qr_code.png'
-    output_printable = '/home/shell/test_fb/website/qr_code_printable.png'
+    output_basic = '/home/shell/test_fb/docs/qr_code.png'
+    output_printable = '/home/shell/test_fb/docs/qr_code_printable.png'
 
     print(f"\n🎄 Generating QR Codes for TSV Marquartstein")
     print(f"URL: {url}\n")

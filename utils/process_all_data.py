@@ -235,8 +235,8 @@ if __name__ == '__main__':
     games_csv = '/home/shell/test_fb/data/games_first_second_team_friendlies.csv'
     player_csv = '/home/shell/test_fb/data/training_game_playerlist.csv'
 
-    games_output = '/home/shell/test_fb/website/assets/data/games_stats.json'
-    player_output = '/home/shell/test_fb/website/assets/data/player_participation.json'
+    games_output = '/home/shell/test_fb/docs/assets/data/games_stats.json'
+    player_output = '/home/shell/test_fb/docs/assets/data/player_participation.json'
 
     # Process all data
     print("Starting data processing...")

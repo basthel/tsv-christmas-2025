@@ -65,7 +65,7 @@ def extract_colors(image_path, num_colors=8):
 
 if __name__ == '__main__':
     logo_path = '/home/shell/test_fb/data/logo.png'
-    output_path = '/home/shell/test_fb/website/assets/data/colors.json'
+    output_path = '/home/shell/test_fb/docs/assets/data/colors.json'
 
     print("Extracting colors from logo...")
     colors = extract_colors(logo_path)

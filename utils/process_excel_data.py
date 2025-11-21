@@ -37,7 +37,7 @@ def process_excel_to_json(excel_path, output_path):
 
 if __name__ == '__main__':
     excel_path = '/home/shell/test_fb/data/First_Second_A_youth_playerscount_years.xlsx'
-    output_path = '/home/shell/test_fb/website/assets/data/historical_players.json'
+    output_path = '/home/shell/test_fb/docs/assets/data/historical_players.json'
 
     print("Processing Excel file...")
     data = process_excel_to_json(excel_path, output_path)

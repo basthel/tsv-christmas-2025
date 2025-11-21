@@ -19,7 +19,7 @@ Die Website ist erreichbar über GitHub Pages: [URL wird nach Deployment eingef�
 
 Scanne den QR-Code mit deinem Smartphone für direkten Zugriff:
 
-![QR Code](website/qr_code_printable.png)
+![QR Code](docs/qr_code_printable.png)
 
 ## Technologie
 
@@ -32,7 +32,7 @@ Scanne den QR-Code mit deinem Smartphone für direkten Zugriff:
 
 ```
 .
-├── website/                # Website-Dateien (für GitHub Pages)
+├── docs/                # Website-Dateien (für GitHub Pages)
 │   ├── index.html         # Hauptseite
 │   ├── css/               # Stylesheets
 │   ├── js/                # JavaScript
